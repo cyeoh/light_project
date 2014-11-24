@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<script>
+ $(document).ready(function() {
+ 	 $("#echoResult").load("/light_data");
+   var refreshId = setInterval(function() {
+      $("#echoResult").load('/light_data?randval='+ Math.random());
+   }, 10000);
+});
+</script>
+<script>
+  function toggle_val(lightid, lightstate)
+  {
+    var xhreq = new XMLHttpRequest();
+    xhreq.open("GET", "/light_set/?randval=" + Math.random() + "&light="+lightid + "&lightstate="+lightstate);
+    xhreq.send(null);
+    $("#echoResult").load('/light_data?randval='+ Math.random());
+  }
+
+</script>
+
+<div id='echoResult'></div>
+{% endblock %}
